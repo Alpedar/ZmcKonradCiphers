@@ -116,8 +116,7 @@
             return alphabet[nextIndex];
         }
 
-        async function displayResult(alphabet, text) {
-            const outputTextArea = document.getElementById('output');
+        async function displayResult(alphabet, text, outputTextArea) {
 
             let currentText = '';
 
@@ -150,7 +149,8 @@
             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
             const encryptedText = encrypt(text, password, alphabet);
 
-            displayResult(alphabet, encryptedText);
+            const outputTextArea = document.getElementById('output');
+            displayResult(alphabet, encryptedText, outputTextArea);
         }
 
         function decryptAndDisplayResult() {
@@ -162,7 +162,8 @@
 
             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
             const decryptedText = decrypt(text, password, alphabet);
-            displayResult(alphabet, decryptedText);
+            const outputTextArea = document.getElementById('output');
+            displayResult(alphabet, decryptedText, outputTextArea);
             // Replace underscores with spaces
             const finalText = decryptedText.replace(/_/g, ' ');
             outputTextArea.value = finalText;
