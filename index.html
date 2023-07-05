@@ -55,8 +55,9 @@
     </style>
     <script>
         function preprocessText(input) {
-            const cleanedInput = input.replace(/\s+/g, '_');
-            const cleanedUppercaseInput = cleanedInput.toUpperCase().replace(/[^A-Z0-9_!?.,-]/g, '');
+            const cleanedInput = input.replace(/\n/g, '__'); // Replace newlines with two underscores
+            const cleanedInputWithUnderscore = cleanedInput.replace(/\s+/g, '_');
+            const cleanedUppercaseInput = cleanedInputWithUnderscore.toUpperCase().replace(/[^A-Z0-9_!?.,-]/g, '');
             return cleanedUppercaseInput;
         }
 
@@ -165,8 +166,10 @@
             const decryptedText = decrypt(text, password, alphabet);
             const outputTextArea = document.getElementById('output');
             await displayResult(alphabet, decryptedText, outputTextArea);
-            // Replace underscores with spaces
-            const finalText = decryptedText.replace(/_/g, ' ');
+            // Replace two underscores with newline
+            let processedText = outputTextArea.value.replace(/__/g, '\n');
+            // Replace single underscores with spaces
+            processedText = processedText.replace(/_/g, ' ');
             outputTextArea.value = finalText;
         }
     </script>
