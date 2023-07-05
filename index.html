@@ -53,119 +53,121 @@
             resize: vertical;
         }
     </style>
-<script>
-    function preprocessText(input) {
-        const cleanedInput = input.replace(/\s+/g, '_');
-        const cleanedUppercaseInput = cleanedInput.toUpperCase().replace(/[^A-Z0-9_!?.,-]/g, '');
-        return cleanedUppercaseInput;
-    }
-
-    function encryptCharacter(char, passwordChar, alphabet) {
-        const charIndex = alphabet.indexOf(char);
-        const passwordIndex = alphabet.indexOf(passwordChar);
-        const encryptedIndex = (charIndex + passwordIndex) % alphabet.length;
-        return alphabet[encryptedIndex];
-    }
-
-    function encrypt(text, password, alphabet) {
-        const cleanedText = preprocessText(text);
-        const cleanedPassword = preprocessText(password);
-
-        let encryptedText = '';
-
-        for (let i = 0; i < cleanedText.length; i++) {
-            const char = cleanedText[i];
-            const passwordChar = cleanedPassword[i % cleanedPassword.length];
-            const encryptedChar = encryptCharacter(char, passwordChar, alphabet);
-            encryptedText += encryptedChar;
+    <script>
+        function preprocessText(input) {
+            const cleanedInput = input.replace(/\s+/g, '_');
+            const cleanedUppercaseInput = cleanedInput.toUpperCase().replace(/[^A-Z0-9_!?.,-]/g, '');
+            return cleanedUppercaseInput;
         }
 
-        return encryptedText;
-    }
-
-    function decryptCharacter(char, passwordChar, alphabet) {
-        const charIndex = alphabet.indexOf(char);
-        const passwordIndex = alphabet.indexOf(passwordChar);
-        const decryptedIndex = (charIndex - passwordIndex + alphabet.length) % alphabet.length;
-        return alphabet[decryptedIndex];
-    }
-
-    function decrypt(text, password, alphabet) {
-        const cleanedText = preprocessText(text);
-        const cleanedPassword = preprocessText(password);
-
-        let decryptedText = '';
-
-        for (let i = 0; i < cleanedText.length; i++) {
-            const char = cleanedText[i];
-            const passwordChar = cleanedPassword[i % cleanedPassword.length];
-            const decryptedChar = decryptCharacter(char, passwordChar, alphabet);
-            decryptedText += decryptedChar;
+        function encryptCharacter(char, passwordChar, alphabet) {
+            const charIndex = alphabet.indexOf(char);
+            const passwordIndex = alphabet.indexOf(passwordChar);
+            const encryptedIndex = (charIndex + passwordIndex) % alphabet.length;
+            return alphabet[encryptedIndex];
         }
 
-        return decryptedText;
-    }
+        function encrypt(text, password, alphabet) {
+            const cleanedText = preprocessText(text);
+            const cleanedPassword = preprocessText(password);
 
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+            let encryptedText = '';
 
-    function rotateLetter(currentLetter, alphabet) {
-        const currentIndex = alphabet.indexOf(currentLetter);
-        const nextIndex = (currentIndex + 1) % alphabet.length;
-        return alphabet[nextIndex];
-    }
-
-    async function displayResult(alphabet, text) {
-        const outputTextArea = document.getElementById('output');
-
-        let currentText = '';
-
-        for (let i = 0; i < text.length; i++) {
-            const correctLetter = text[i];
-            let currentLetter = 'A';
-            currentText += currentLetter;
-            outputTextArea.value = currentText;
-
-            let nextLetter = currentLetter;
-
-            while (nextLetter !== correctLetter) {
-                nextLetter = rotateLetter(nextLetter, alphabet);
-                currentText = currentText.slice(0, -1) + nextLetter;
-                outputTextArea.value = currentText;
-                await delay(50);
+            for (let i = 0; i < cleanedText.length; i++) {
+                const char = cleanedText[i];
+                const passwordChar = cleanedPassword[i % cleanedPassword.length];
+                const encryptedChar = encryptCharacter(char, passwordChar, alphabet);
+                encryptedText += encryptedChar;
             }
 
-            await delay(150);
+            return encryptedText;
         }
-    }
 
-    function encryptAndDisplayResult() {
-        const passwordInput = document.getElementById('heslo');
-        const textInput = document.getElementById('text');
+        function decryptCharacter(char, passwordChar, alphabet) {
+            const charIndex = alphabet.indexOf(char);
+            const passwordIndex = alphabet.indexOf(passwordChar);
+            const decryptedIndex = (charIndex - passwordIndex + alphabet.length) % alphabet.length;
+            return alphabet[decryptedIndex];
+        }
 
-        const password = preprocessText(passwordInput.value);
-        const text = preprocessText(textInput.value);
+        function decrypt(text, password, alphabet) {
+            const cleanedText = preprocessText(text);
+            const cleanedPassword = preprocessText(password);
 
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
-        const encryptedText = encrypt(text, password, alphabet);
+            let decryptedText = '';
 
-        displayResult(alphabet, encryptedText);
-    }
+            for (let i = 0; i < cleanedText.length; i++) {
+                const char = cleanedText[i];
+                const passwordChar = cleanedPassword[i % cleanedPassword.length];
+                const decryptedChar = decryptCharacter(char, passwordChar, alphabet);
+                decryptedText += decryptedChar;
+            }
 
-    function decryptAndDisplayResult() {
-        const passwordInput = document.getElementById('heslo');
-        const textInput = document.getElementById('text');
+            return decryptedText;
+        }
 
-        const password = preprocessText(passwordInput.value);
-        const text = preprocessText(textInput.value);
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
-        const decryptedText = decrypt(text, password, alphabet);
-        const finalText = decryptedText.replace(/_/g, ' ');
-        displayResult(alphabet, finalText);
-    }
-</script>
+        function rotateLetter(currentLetter, alphabet) {
+            const currentIndex = alphabet.indexOf(currentLetter);
+            const nextIndex = (currentIndex + 1) % alphabet.length;
+            return alphabet[nextIndex];
+        }
+
+        async function displayResult(alphabet, text) {
+            const outputTextArea = document.getElementById('output');
+
+            let currentText = '';
+
+            for (let i = 0; i < text.length; i++) {
+                const correctLetter = text[i];
+                let currentLetter = 'A';
+                currentText += currentLetter;
+                outputTextArea.value = currentText;
+
+                let nextLetter = currentLetter;
+
+                while (nextLetter !== correctLetter) {
+                    nextLetter = rotateLetter(nextLetter, alphabet);
+                    currentText = currentText.slice(0, -1) + nextLetter;
+                    outputTextArea.value = currentText;
+                    await delay(50);
+                }
+
+                await delay(150);
+            }
+        }
+
+        function encryptAndDisplayResult() {
+            const passwordInput = document.getElementById('heslo');
+            const textInput = document.getElementById('text');
+
+            const password = preprocessText(passwordInput.value);
+            const text = preprocessText(textInput.value);
+
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
+            const encryptedText = encrypt(text, password, alphabet);
+
+            displayResult(alphabet, encryptedText);
+        }
+
+        function decryptAndDisplayResult() {
+            const passwordInput = document.getElementById('heslo');
+            const textInput = document.getElementById('text');
+
+            const password = preprocessText(passwordInput.value);
+            const text = preprocessText(textInput.value);
+
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
+            const decryptedText = decrypt(text, password, alphabet);
+            displayResult(alphabet, decryptedText);
+            // Replace underscores with spaces
+            const finalText = decryptedText.replace(/_/g, ' ');
+            outputTextArea.value = finalText;
+        }
+    </script>
 </head>
 
 <body>
