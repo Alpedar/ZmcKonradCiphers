@@ -137,9 +137,10 @@
 
                 await delay(150);
             }
+            return Promise.resolve();
         }
 
-        function encryptAndDisplayResult() {
+        async function encryptAndDisplayResult() {
             const passwordInput = document.getElementById('heslo');
             const textInput = document.getElementById('text');
 
@@ -150,10 +151,10 @@
             const encryptedText = encrypt(text, password, alphabet);
 
             const outputTextArea = document.getElementById('output');
-            displayResult(alphabet, encryptedText, outputTextArea);
+            await displayResult(alphabet, encryptedText, outputTextArea);
         }
 
-        function decryptAndDisplayResult() {
+        async function decryptAndDisplayResult() {
             const passwordInput = document.getElementById('heslo');
             const textInput = document.getElementById('text');
 
@@ -163,7 +164,7 @@
             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?.,-";
             const decryptedText = decrypt(text, password, alphabet);
             const outputTextArea = document.getElementById('output');
-            displayResult(alphabet, decryptedText, outputTextArea);
+            await displayResult(alphabet, decryptedText, outputTextArea);
             // Replace underscores with spaces
             const finalText = decryptedText.replace(/_/g, ' ');
             outputTextArea.value = finalText;
