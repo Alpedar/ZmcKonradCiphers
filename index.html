@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Encryption</title>
+    <title>Šifrování</title>
     <style>
         body {
             font-family: cursive;
@@ -132,10 +132,10 @@
                     nextLetter = rotateLetter(nextLetter, alphabet);
                     currentText = currentText.slice(0, -1) + nextLetter;
                     outputTextArea.value = currentText;
-                    await delay(50);
+                    await delay(25);
                 }
 
-                await delay(150);
+                await delay(100);
             }
             return Promise.resolve();
         }
@@ -181,8 +181,8 @@
         <br />
         <textarea id="text" rows="10" cols="50"></textarea>
         <br />
-        <button onclick="encryptAndDisplayResult()">Sifruj</button>
-        <button onclick="decryptAndDisplayResult()">Desifruj</button>
+        <button onclick="encryptAndDisplayResult()">Šifruj</button>
+        <button onclick="decryptAndDisplayResult()">Dešifruj</button>
         <br />
         <textarea id="output" rows="10" cols="50" readonly></textarea>
     </div>
