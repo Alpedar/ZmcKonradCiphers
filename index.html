@@ -167,9 +167,9 @@
             const outputTextArea = document.getElementById('output');
             await displayResult(alphabet, decryptedText, outputTextArea);
             // Replace two underscores with newline
-            let processedText = outputTextArea.value.replace(/__/g, '\n');
+            let finalText = outputTextArea.value.replace(/__/g, '\n');
             // Replace single underscores with spaces
-            processedText = processedText.replace(/_/g, ' ');
+            finalText = finalText.replace(/_/g, ' ');
             outputTextArea.value = finalText;
         }
     </script>
