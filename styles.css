@@ -1,0 +1,48 @@
+body {
+    font-family: cursive;
+    background-color: #e8d6bb;
+    padding: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="password"],
+textarea {
+    padding: 5px;
+    font-family: cursive;
+    font-size: 16px;
+    border: none;
+    background-color: #f7e5d6;
+    border-radius: 5px;
+    resize: none;
+}
+
+textarea {
+    height: 150px;
+    width: 300px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-family: cursive;
+    border: none;
+    background-color: #d6bba1;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#output {
+    margin-top: 10px;
+    padding: 5px;
+    font-family: cursive;
+    font-size: 16px;
+    border: none;
+    background-color: #f7e5d6;
+    border-radius: 5px;
+    resize: vertical;
+}
